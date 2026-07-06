@@ -1,8 +1,81 @@
-/*
+/* portal styles only touch the parts added by this plugin */
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.portal-embed {
+	position: relative;
+	padding: 0;
+}
 
-If your plugin does not need CSS, delete this file.
+/* place the edit button relative to the portal box */
+.portal-embed .cm-editor {
+	height: auto;
+	background: transparent;
+}
 
-*/
+/* let the editor content show without its own scrollbar */
+.portal-embed .cm-scroller {
+	overflow: visible;
+	padding: 0;
+}
+
+/* keep the embedded editor tight to the block */
+.portal-embed .cm-content {
+	padding: 0;
+}
+
+/* hide obsidian's button since the guarded fence needs our button */
+.cm-embed-block:has(.portal-embed) > .edit-block-button {
+	display: none;
+}
+
+/* show this button only when the raw fence needs to be opened */
+.portal-edit-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 10;
+	padding: var(--size-2-2);
+	border-radius: var(--radius-s);
+	color: var(--text-muted);
+	cursor: pointer;
+	opacity: 0;
+	transition: opacity 120ms ease;
+}
+
+.cm-embed-block:has(.portal-embed):hover .portal-edit-button {
+	opacity: 1;
+}
+
+.portal-edit-button:hover {
+	background: var(--background-modifier-hover);
+	color: var(--text-normal);
+}
+
+/* hide the backing folder while leaving it as a normal vault folder */
+.nav-folder:has(> .nav-folder-title[data-path='portals']) {
+	display: none;
+}
+
+.portal-error {
+	color: var(--text-error);
+	font-size: var(--font-smaller);
+	padding: var(--size-2-2) 0;
+}
+
+.portal-error a {
+	cursor: pointer;
+}
+
+/* modal styles */
+
+.portal-modal-hint {
+	color: var(--text-muted);
+	margin-top: 0;
+}
+
+.portal-modal-input {
+	width: 100%;
+}
+
+.portal-pick-id {
+	font-weight: var(--font-semibold);
+}
